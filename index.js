@@ -20,6 +20,34 @@
   const MINUTE_SPIN = -520;
   const MINUTE_SPIN_DURATION = 1300;
 
+  // shorter, gentler continuation used when arriving from another
+  // clock page (see the sessionStorage handoff below) — no need for
+  // a dramatic flourish since the hands are already moving
+  const CONTINUE_DURATION = 800;
+
+  // ---- cross-page hand continuity ----
+  // Right before navigating away, save the hands' exact current angle.
+  // The next clock page reads it and animates FROM that angle instead
+  // of its usual multi-spin flourish — so the hands feel like they
+  // keep winding/unwinding continuously across the page transition
+  // instead of resetting.
+  const HAND_STORAGE_KEY = 'clockHandAngles';
+  function readStoredAngles() {
+    try {
+      const raw = sessionStorage.getItem(HAND_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  function writeStoredAngles(hour, minute) {
+    try {
+      sessionStorage.setItem(HAND_STORAGE_KEY, JSON.stringify({ hour, minute }));
+    } catch (e) {
+      // ignore — continuity is a nice-to-have, not essential
+    }
+  }
+
   function setAngle(el, deg) {
     el.style.transform = `translate(-50%, -100%) rotate(${deg}deg)`;
   }
@@ -65,6 +93,10 @@
     }
   });
 
+  window.addEventListener('pagehide', () => {
+    writeStoredAngles(hourCurrent, minuteCurrent);
+  });
+
   // Spin-in: the hand's angle is the LIVE mouse target plus a decaying
   // extra-rotation offset. As the offset eases to exactly 0, the hand is
   // already sitting on the current cursor angle — so tracking can take
@@ -103,11 +135,16 @@
     setAngle(minuteEl, RESTING_TARGET);
   } else {
     requestAnimationFrame(trackLoop);
-    spinIn(hourEl, HOUR_SPIN, HOUR_SPIN_DURATION, (finalAngle) => {
+    const stored = readStoredAngles();
+    const hourSpin = stored ? stored.hour - mouseTarget : HOUR_SPIN;
+    const minuteSpin = stored ? stored.minute - mouseTarget : MINUTE_SPIN;
+    const hourDuration = stored ? CONTINUE_DURATION : HOUR_SPIN_DURATION;
+    const minuteDuration = stored ? CONTINUE_DURATION : MINUTE_SPIN_DURATION;
+    spinIn(hourEl, hourSpin, hourDuration, (finalAngle) => {
       hourCurrent = finalAngle;
       hourSettled = true;
     });
-    spinIn(minuteEl, MINUTE_SPIN, MINUTE_SPIN_DURATION, (finalAngle) => {
+    spinIn(minuteEl, minuteSpin, minuteDuration, (finalAngle) => {
       minuteCurrent = finalAngle;
       minuteSettled = true;
     });
