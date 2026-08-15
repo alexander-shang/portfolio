@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Alex Shang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="page--about">
+
+<header class="top">
+  <span class="logo">AS</span>
+  <nav class="tabs">
+    <a href="index.html" class="tab tab--ghost-link">1</a>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <span class="tab tab--active">about<sup>2</sup></span>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <span class="tab tab--ghost">3</span>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <span class="tab tab--ghost">4</span>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <span class="tab tab--ghost">5</span>
+  </nav>
+</header>
+
+<main class="stage">
+
+  <div class="headline-wrap" id="headline-wrap">
+    <h1 class="headline">A day<br>in my<br>life</h1>
+    <div class="headline-hover" id="headline-hover">
+      <div class="time-big" id="hover-time">8:00</div>
+      <p class="bio" id="hover-bio"></p>
+      <div class="tags" id="hover-tags"></div>
+    </div>
+  </div>
+
+  <div class="clock" id="clock">
+
+    <!-- 8AM -->
+    <button type="button" class="clock__label clock__label--h8" data-angle="240" data-time="8:00" 
+      data-blurb="My name is Alex Shang, a recent graduate from the University of North Carolina with a degree in Computer Science and Economics.
+       As such, I’m interested in the intersection of technology, data, and people. Whether through data analysis, app development, or research, 
+       I’m always looking for problems to solve."
+       data-tags="may 2026 grad|cs + econ|gpa: 3.73"
+       >wake up
+    </button>
+
+    <!-- 10AM -->
+    <button type="button" class="clock__label clock__label--h10" data-angle="300" data-time="10:00" 
+      data-blurb="I’m looking for opportunities where I can  work on things that are complex enough to require curiosity, collaborative enough 
+      to require people, and tangible enough that I can point to my work and say, that made something better."
+      data-tags="impact|problem solving|collaboration"
+      >explore
+    </button>
+
+    <!-- 12PM -->
+    <button type="button" class="clock__label clock__label--h12" data-angle="0" data-time="12:00" 
+      data-blurb="Lunch time! As much as I like sushi and fried chicken, my biggest appetite is for knowledge (lol). I’m constantly 
+      picking up new tools, technologies, and ideas. I like working with people as much as I like working with computers. A shared meal is 
+      always more fun than one alone."
+      data-tags="adaptable|quick learner"
+      >eat
+    </button>
+
+    <!-- 2PM -->
+    <button type="button" class="clock__label clock__label--h2" data-angle="60" data-time="14:00" 
+      data-blurb="I like turning messy problems into things people can actually use. Whether I'm working with data, experimenting with AI, or 
+      building a product from scratch, I enjoy figuring out what needs to happen between an idea and a finished experience. I'm especially drawn
+      to problems where understanding the user matters just as much as understanding the system."
+      data-tags="python|javascript|sql|ai"
+      >build
+    </button>
+
+    <!-- 5PM -->
+    <button type="button" class="clock__label clock__label--h5" data-angle="150" data-time="17:00" 
+      data-blurb="Outside of work, I make things because I want to. Starting with a blank canvas, a problem that doesn't have an obvious answer, 
+      and a lot of trial and error, sounds kind of similar to my technical work, no? However, my studio is where I get to create without 
+      worrying about whether something is useful."
+      data-tags="photoshop|blender|figma|procreate"
+      >create
+    </button>
+
+    <span class="clock__tick clock__tick--h1"></span>
+    <span class="clock__tick clock__tick--h3"></span>
+    <span class="clock__tick clock__tick--h4"></span>
+    <span class="clock__tick clock__tick--h6"></span>
+    <span class="clock__tick clock__tick--h7"></span>
+    <span class="clock__tick clock__tick--h9"></span>
+    <span class="clock__tick clock__tick--h11"></span>
+
+    <div class="hand hand--hour" id="hand-hour"></div>
+    <div class="hand hand--minute" id="hand-minute"></div>
+  </div>
+</main>
+
+<script src="about.js"></script>
+</body>
+</html>
