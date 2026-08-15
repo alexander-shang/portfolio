@@ -22,6 +22,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.4s ease;
 }
 
 /* ============================================================
@@ -66,25 +67,54 @@ body {
   margin-left: 2px;
 }
 
+/* Ghost nav tabs — used for every page you're NOT currently on.
+   They expand on hover/focus to reveal the destination page name
+   (see .tab__num / .tab__label below). One shared rule now covers
+   every ghost tab on every page, whether it's a plain number-only
+   pill or the "1" link back to home — no more separate
+   .tab--ghost-link variant needed. */
 .tab--ghost {
+  display: inline-flex;
+  align-items: center;
   background: var(--ghost-bg);
   color: #9A9A9A;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 12px;
   padding: 7px 10px;
-}
-
-tab--ghost-link {
-  background: var(--ghost-bg);
-  color: #9A9A9A;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  padding: 7px 10px;
-  text-decoration: none;
   border-radius: 6px;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
   transition: color 0.15s;
 }
-.tab--ghost-link:hover { color: var(--ink); }
+.tab--ghost:hover,
+.tab--ghost:focus-visible {
+  color: var(--ink);
+}
+.tab--ghost:focus-visible {
+  outline: 2px solid var(--frame);
+  outline-offset: 2px;
+}
+
+.tab__num {
+  font-family: 'IBM Plex Mono', monospace;
+}
+.tab__label {
+  display: inline-block;
+  max-width: 0;
+  margin-left: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  transition: max-width 0.25s ease, opacity 0.2s ease, margin-left 0.25s ease;
+}
+.tab--ghost:hover .tab__label,
+.tab--ghost:focus-visible .tab__label {
+  max-width: 90px;
+  margin-left: 6px;
+  opacity: 1;
+}
 
 .tab-sep {
   display: flex;
@@ -118,164 +148,168 @@ tab--ghost-link {
   .headline { text-align: center; }
 }
 
-
 /* headline-wrap: used on pages where the default headline crossfades
-   into a hover-triggered blurb (see about.html / about.js) */
-   .headline-wrap {
-    position: relative;
-    min-height: 300px;
-    min-width: 500px;
-  }
-  .headline-wrap .headline,
-  .headline-hover {
-    transition: opacity 0.2s ease;
-  }
-  .headline-hover {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .headline-wrap.is-hover .headline { opacity: 0; }
-  .headline-wrap.is-hover .headline-hover { opacity: 1; }
-   
-  .time-big {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    font-size: clamp(2.4rem, 5.5vw, 4rem);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    margin-bottom: 16px;
-  }
-  .bio {
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 1.5;
-    margin: 0 0 16px;
-  }
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .tag {
-    background: var(--ghost-bg);
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 12px;
-    font-family: 'IBM Plex Mono', monospace;
-    color: #555;
-  }
-   
-  @media (max-width: 700px) {
-    .headline-wrap { text-align: center; max-width: none; }
-    .tags { justify-content: center; }
-  }
-   
-  .clock {
-    position: relative;
-    width: clamp(260px, 34vw, 360px);
-    height: clamp(260px, 34vw, 360px);
-  }
-   
-  .clock__label {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    font-size: clamp(18px, 2.4vw, 22px);
-    color: var(--ink);
-    text-decoration: none;
-    font-weight: 400;
-    transition: opacity 0.15s;
-  }
-  .clock__label:hover { opacity: 0.5; }
-   
-  /* reset for labels that are <button> elements (interactive hover
-     triggers, not navigation links — see about.html) */
-  button.clock__label {
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-  }
-  .clock__label:focus-visible {
-    outline: 2px solid var(--frame);
-    outline-offset: 6px;
-    border-radius: 4px;
-  }
-   
-  .clock__label--n { left: 50%; top: 0%; }
-  .clock__label--e { left: 100%; top: 50%; }
-  .clock__label--s { left: 50%; top: 100%; }
-  .clock__label--w { left: 0%; top: 50%; }
-  .clock__label--h2  { left: 93.3%; top: 25%; }
-  .clock__label--h5  { left: 75%;   top: 93.3%; }
-  .clock__label--h8  { left: 6.7%;  top: 75%; }
-  .clock__label--h10 { left: 6.7%;  top: 25%; }
-  .clock__label--h12 { left: 50%;   top: 0%; }
-   
-  .clock__tick {
-    position: absolute;
-    width: 1.5px;
-    height: 26px;
-    background: var(--line);
-    opacity: 0.6;
-    transform: translate(-50%, -50%);
-  }
-  .clock__tick--h1  { left: 75%;    top: 6.7%;  transform: translate(-50%, -50%) rotate(30deg); }
-  .clock__tick--h2  { left: 93.3%;  top: 25%;   transform: translate(-50%, -50%) rotate(60deg); }
-  .clock__tick--h3  { left: 100%;   top: 50%;   transform: translate(-50%, -50%) rotate(90deg); }
-  .clock__tick--h4  { left: 93.3%;  top: 75%;   transform: translate(-50%, -50%) rotate(120deg); }
-  .clock__tick--h6  { left: 50%;    top: 100%;  transform: translate(-50%, -50%) rotate(0deg); }
-  .clock__tick--h7  { left: 25%;    top: 93.3%; transform: translate(-50%, -50%) rotate(210deg); }
-  .clock__tick--h8  { left: 6.7%;   top: 75%;   transform: translate(-50%, -50%) rotate(240deg); }
-  .clock__tick--h9  { left: 0%;     top: 50%;   transform: translate(-50%, -50%) rotate(90deg); }
-  .clock__tick--h10 { left: 6.7%;   top: 25%;   transform: translate(-50%, -50%) rotate(300deg); }
-  .clock__tick--h11 { left: 25%;    top: 6.7%;  transform: translate(-50%, -50%) rotate(330deg); }
-   
-  /* ============================================================
-     HANDS
-     pivot sits at the container center; each hand's own bottom
-     edge is pinned there and it extends upward, so rotate(0deg)
-     points north — matches the angle math in index.js
-     ============================================================ */
-  .hand {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 2px;
-    background: var(--ink);
-    transform-origin: 50% 100%;
-    border-radius: 2px;
-  }
-  .hand--hour { height: 26%; }
-  .hand--minute { height: 44%; }
-   
-  /* ============================================================
-     BOTTOM BAR
-     ============================================================ */
-  .bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-    padding: 24px 32px 40px;
-  }
-   
-  .barcode {
-    width: 180px;
-    height: 40px;
-  }
-   
-  .signature {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.25em;
-    color: var(--ink);
-  }
-   
-  @media (max-width: 560px) {
-    .clock__label { font-size: 16px; }
-    .top { padding: 18px 20px; }
-    .bottom { padding: 18px 20px 28px; }
-  }
+   into a hover-triggered blurb (see about.html / about.js).
+   Width scales with the viewport (same clamp() approach as .clock
+   below) instead of a fixed px value — a rigid width stayed the same
+   size while the clock shrank on resize, which is what was throwing
+   the "A day in my life" text out of visual balance with the clock
+   as the window narrowed. Scaling both together keeps them paired. */
+.headline-wrap {
+  position: relative;
+  width: clamp(280px, 32vw, 460px);
+  min-height: 260px;
+}
+.headline-wrap .headline,
+.headline-hover {
+  transition: opacity 0.2s ease;
+}
+.headline-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.headline-wrap.is-hover .headline { opacity: 0; }
+.headline-wrap.is-hover .headline-hover { opacity: 1; }
+
+.time-big {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.bio {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  background: var(--ghost-bg);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #555;
+}
+
+@media (max-width: 700px) {
+  .headline-wrap { width: 100%; max-width: 460px; text-align: center; }
+  .tags { justify-content: center; }
+}
+
+.clock {
+  position: relative;
+  width: clamp(260px, 34vw, 360px);
+  height: clamp(260px, 34vw, 360px);
+}
+
+.clock__label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: clamp(18px, 2.4vw, 22px);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.15s;
+}
+.clock__label:hover { opacity: 0.5; }
+
+/* reset for labels that are <button> elements (interactive hover
+   triggers, not navigation links — see about.html) */
+button.clock__label {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+.clock__label:focus-visible {
+  outline: 2px solid var(--frame);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+
+.clock__label--n { left: 50%; top: 0%; }
+.clock__label--e { left: 100%; top: 50%; }
+.clock__label--s { left: 50%; top: 100%; }
+.clock__label--w { left: 0%; top: 50%; }
+.clock__label--h2  { left: 93.3%; top: 25%; }
+.clock__label--h5  { left: 75%;   top: 93.3%; }
+.clock__label--h8  { left: 6.7%;  top: 75%; }
+.clock__label--h10 { left: 6.7%;  top: 25%; }
+.clock__label--h12 { left: 50%;   top: 0%; }
+
+.clock__tick {
+  position: absolute;
+  width: 1.5px;
+  height: 26px;
+  background: var(--line);
+  opacity: 0.6;
+  transform: translate(-50%, -50%);
+}
+.clock__tick--h1  { left: 75%;    top: 6.7%;  transform: translate(-50%, -50%) rotate(30deg); }
+.clock__tick--h2  { left: 93.3%;  top: 25%;   transform: translate(-50%, -50%) rotate(60deg); }
+.clock__tick--h3  { left: 100%;   top: 50%;   transform: translate(-50%, -50%) rotate(90deg); }
+.clock__tick--h4  { left: 93.3%;  top: 75%;   transform: translate(-50%, -50%) rotate(120deg); }
+.clock__tick--h6  { left: 50%;    top: 100%;  transform: translate(-50%, -50%) rotate(0deg); }
+.clock__tick--h7  { left: 25%;    top: 93.3%; transform: translate(-50%, -50%) rotate(210deg); }
+.clock__tick--h8  { left: 6.7%;   top: 75%;   transform: translate(-50%, -50%) rotate(240deg); }
+.clock__tick--h9  { left: 0%;     top: 50%;   transform: translate(-50%, -50%) rotate(90deg); }
+.clock__tick--h10 { left: 6.7%;   top: 25%;   transform: translate(-50%, -50%) rotate(300deg); }
+.clock__tick--h11 { left: 25%;    top: 6.7%;  transform: translate(-50%, -50%) rotate(330deg); }
+
+/* ============================================================
+   HANDS
+   pivot sits at the container center; each hand's own bottom
+   edge is pinned there and it extends upward, so rotate(0deg)
+   points north — matches the angle math in index.js
+   ============================================================ */
+.hand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  background: var(--ink);
+  transform-origin: 50% 100%;
+  border-radius: 2px;
+}
+.hand--hour { height: 22%; }
+.hand--minute { height: 40%; }
+
+/* ============================================================
+   BOTTOM BAR
+   ============================================================ */
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 24px 32px 40px;
+}
+
+.barcode {
+  width: 180px;
+  height: 40px;
+}
+
+.signature {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+}
+
+@media (max-width: 560px) {
+  .clock__label { font-size: 16px; }
+  .top { padding: 18px 20px; }
+  .bottom { padding: 18px 20px 28px; }
+}
