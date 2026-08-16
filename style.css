@@ -42,6 +42,13 @@
     flex-direction: column;
     transition: background-color 0.4s ease;
   }
+
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    transition: opacity 600ms ease;
+  }
   
   /* ============================================================
      TOP BAR

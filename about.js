@@ -62,11 +62,11 @@
   // ============================================================
 
   const TIME_COLORS = {
-    '240': 'linear-gradient(0deg, #FFDBB8, #FFFFFF)', // 8am
-    '300': 'rgb(205, 243, 255)', // 10am
-    '0':   'rgb(205, 243, 255)', // noon
-    '60':  'rgb(205, 243, 255)', // 2pm
-    '150': 'linear-gradient(0deg, #FFC1B8, #FFFFFF)'  // 5pm
+    '240': 'linear-gradient(0deg, #FFDBB8 0%, #EDF7FF 40%)', // 8am
+    '300': 'linear-gradient(0deg, #EDF7FF)', // 10am
+    '0':   'linear-gradient(0deg, #EDF7FF)', // noon
+    '60':  'linear-gradient(0deg, #EDF7FF)', // 2pm
+    '150': 'linear-gradient(0deg, #FFD0C9, #EDF7FF 40%)'  // 5pm
   };
 
   const DEFAULT_BG = '#FFFFFF';
@@ -82,9 +82,10 @@
   // 2pm  = 45°
   // 5pm  = 0°   (right)
   //
-  // The rest of the circle exists below the horizon, so if the
-  // sun travels in the reverse direction it can move underneath
-  // the viewport.
+  // The rest of the circle exists below the horizon. Only the
+  // 5pm -> 8am transition is forced clockwise (under the
+  // viewport); every other transition takes the natural
+  // shortest path, which may go either direction.
   // ============================================================
 
   const SUN_ORBIT = {
@@ -102,6 +103,11 @@
     '150': 0    // 5pm
   };
 
+  // The only pair of keys that should force the sun under the
+  // screen instead of swinging back over the top.
+  const FORCE_CLOCKWISE_FROM = '150'; // 5pm
+  const FORCE_CLOCKWISE_TO = '240';   // 8am
+
   function getSunPosition(angle) {
     const radians = angle * Math.PI / 180;
   
@@ -113,6 +119,12 @@
 
   let sunAngle = SUN_ANGLES['240'];
   let sunAnimation = null;
+  let sunRevealed = false;
+
+  // Tracks the last key passed to moveSun so we know whether this
+  // transition is specifically 5pm -> 8am (forced clockwise) or
+  // anything else (natural shortest path, either direction).
+  let lastSunKey = '240';
 
   function resolveClockwiseTarget(target, current) {
     let t = target;
@@ -122,6 +134,16 @@
   
     return t;
   }
+
+  // Shortest-path resolve: picks whichever equivalent angle
+  // (target ± 360*k) is nearest to current, so the sweep can go
+  // either clockwise or counter-clockwise depending on which is
+  // closer — this is the "natural" default for every transition
+  // except the forced 5pm -> 8am one.
+  function resolveShortestTarget(target, current) {
+    const diff = shortestDiff(target, normalize(current));
+    return current + diff;
+  }
   
   function moveSun(time) {
     if (!sunEl) return;
@@ -129,8 +151,16 @@
     const rawTarget = SUN_ANGLES[time];
   
     if (rawTarget === undefined) return;
+
+    const forceClockwise =
+      lastSunKey === FORCE_CLOCKWISE_FROM &&
+      time === FORCE_CLOCKWISE_TO;
   
-    const targetAngle = resolveClockwiseTarget(rawTarget, sunAngle);
+    const targetAngle = forceClockwise
+      ? resolveClockwiseTarget(rawTarget, sunAngle)
+      : resolveShortestTarget(rawTarget, sunAngle);
+
+    lastSunKey = time;
   
     const startAngle = sunAngle;
     const startTime = performance.now();
@@ -159,6 +189,41 @@
     }
   
     sunAnimation = requestAnimationFrame(animate);
+  }
+
+  // Position the sun correctly on load, but keep it hidden until
+  // the first label activates it — otherwise it flashes at
+  // whatever position/CSS default it has before that point.
+  if (sunEl) {
+    const initialPos = getSunPosition(sunAngle);
+    sunEl.style.left = `${initialPos.x}%`;
+    sunEl.style.top = `${initialPos.y}%`;
+    sunEl.style.opacity = '0';
+    sunEl.style.transition = 'opacity 400ms ease';
+  }
+
+  const bgLayerA = document.createElement('div');
+  const bgLayerB = document.createElement('div');
+  bgLayerA.className = 'bg-layer';
+  bgLayerB.className = 'bg-layer';
+  bgLayerA.style.background = DEFAULT_BG;
+  bgLayerB.style.background = DEFAULT_BG;
+  bgLayerA.style.opacity = '1';
+  bgLayerB.style.opacity = '0';
+  document.body.prepend(bgLayerB);
+  document.body.prepend(bgLayerA);
+
+  let activeBgLayer = bgLayerA;
+  let inactiveBgLayer = bgLayerB;
+
+  function setBackground(value) {
+    inactiveBgLayer.style.background = value;
+    inactiveBgLayer.style.opacity = '1';
+    activeBgLayer.style.opacity = '0';
+
+    const temp = activeBgLayer;
+    activeBgLayer = inactiveBgLayer;
+    inactiveBgLayer = temp;
   }
 
   // ============================================================
@@ -407,6 +472,13 @@
 
       function activate() {
 
+        // Reveal the sun on first interaction, since it starts
+        // hidden until a label is hovered/focused.
+        if (!sunRevealed && sunEl) {
+          sunEl.style.opacity = '1';
+          sunRevealed = true;
+        }
+
         // Pin clock hands
         hoverAngle = angle;
         mouseTarget = angle;
@@ -435,10 +507,11 @@
             .join('');
 
         // Update background
-        document.body.style.background =
+        setBackground(
           TIME_COLORS[
             label.dataset.angle
-          ] || DEFAULT_BG;
+          ] || DEFAULT_BG
+        );
 
         // Move sun around its orbit
         moveSun(label.dataset.angle);
