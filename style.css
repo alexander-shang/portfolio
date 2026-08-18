@@ -402,3 +402,95 @@
     .top { padding: 18px 20px; }
     .bottom { padding: 18px 20px 28px; }
   }
+
+  /* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+.contact-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 60px 20px;
+  text-align: center;
+}
+ 
+.contact-page .headline {
+  text-align: center;
+}
+ 
+.contact-lede {
+  font-size: 15px;
+  color: #6B6D72;
+  max-width: 360px;
+  margin: -12px 0 0;
+}
+ 
+.contact-form {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+ 
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.form-field label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #9A9A9A;
+}
+ 
+.form-field input,
+.form-field textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  padding: 10px 12px;
+  resize: vertical;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--frame);
+  box-shadow: 0 0 0 3px rgba(37, 69, 245, 0.12);
+}
+ 
+.btn-submit {
+  align-self: flex-start;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--paper);
+  background: var(--ink);
+  border: none;
+  border-radius: 6px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+.btn-submit:hover { background: var(--frame); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+ 
+.form-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  min-height: 1.2em;
+  margin: 0;
+}
+.form-status[data-state="success"] { color: #1E7A45; }
+.form-status[data-state="error"] { color: #C1443D; }
