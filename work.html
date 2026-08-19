@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Work — Alex Shang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="page--work">
+
+<header class="top">
+  <span class="logo">AS</span>
+  <nav class="tabs">
+    <a href="index.html" class="tab tab--ghost"><span class="tab__label">home</span><span class="tab__num"><sup>1</sup></span></a>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <a href="about.html" class="tab tab--ghost"><span class="tab__label">about</span><span class="tab__num"><sup>2</sup></span></a>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <a href="work.html" class="tab tab--active"><span class="tab__label">work</span><span class="tab__num"><sup>3</sup></span></a>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <a href="contact.html" class="tab tab--ghost"><span class="tab__label">contact</span><span class="tab__num"><sup>4</sup></span></a>
+    <span class="tab-sep" aria-hidden="true"></span>
+    <a href="studio.html" class="tab tab--ghost"><span class="tab__label">studio</span><span class="tab__num"><sup>5</sup></span></a>
+  </nav>
+</header>
+
+<main class="work-page">
+  <h1 class="headline">Selected<br>work.</h1>
+  <p class="work-lede">A mix of applied ML, product builds, and the research that shaped how I think about data. Click a project for more detail.</p>
+
+  <div class="gallery-grid">
+
+    <button type="button" class="gallery-tile" data-project="flippability">
+      <span class="gallery-tile__thumb" data-label="flippability"></span>
+      <span class="gallery-tile__title">House Flippability Model</span>
+      <span class="gallery-tile__tags">ML · Data</span>
+    </button>
+
+    <button type="button" class="gallery-tile" data-project="scheduling">
+      <span class="gallery-tile__thumb" data-label="scheduling"></span>
+      <span class="gallery-tile__title">CS Dept. Scheduling Assistant</span>
+      <span class="gallery-tile__tags">AI · Full-stack</span>
+    </button>
+
+    <button type="button" class="gallery-tile" data-project="ikea">
+      <span class="gallery-tile__thumb" data-label="ikea assistant"></span>
+      <span class="gallery-tile__title">IKEA Catalogue Assistant</span>
+      <span class="gallery-tile__tags">AI · Product</span>
+    </button>
+
+    <button type="button" class="gallery-tile" data-project="covid">
+      <span class="gallery-tile__thumb" data-label="research"></span>
+      <span class="gallery-tile__title">Economic Impacts of COVID-19</span>
+      <span class="gallery-tile__tags">Research · Econ</span>
+    </button>
+
+    <button type="button" class="gallery-tile" data-project="environment">
+      <span class="gallery-tile__thumb" data-label="research"></span>
+      <span class="gallery-tile__title">Environment, Crime &amp; Property Value</span>
+      <span class="gallery-tile__tags">Research · Econ</span>
+    </button>
+
+  </div>
+</main>
+
+<footer class="bottom">
+  <svg class="barcode" viewBox="0 0 180 40" aria-hidden="true">
+    <rect x="0" y="0" width="2" height="40" fill="#131417"/>
+    <rect x="4" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="7" y="0" width="3" height="40" fill="#131417"/>
+    <rect x="12" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="15" y="0" width="2" height="40" fill="#131417"/>
+    <rect x="19" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="22" y="0" width="4" height="40" fill="#131417"/>
+    <rect x="28" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="31" y="0" width="2" height="40" fill="#131417"/>
+    <rect x="35" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="38" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="41" y="0" width="3" height="40" fill="#131417"/>
+    <rect x="46" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="49" y="0" width="2" height="40" fill="#131417"/>
+    <rect x="53" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="56" y="0" width="4" height="40" fill="#131417"/>
+    <rect x="62" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="65" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="68" y="0" width="2" height="40" fill="#131417"/>
+    <rect x="72" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="75" y="0" width="3" height="40" fill="#131417"/>
+    <rect x="80" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="83" y="0" width="2" height="40" fill="#131417"/>
+    <rect x="87" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="90" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="93" y="0" width="4" height="40" fill="#131417"/>
+    <rect x="99" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="102" y="0" width="2" height="40" fill="#131417"/>
+    <rect x="106" y="0" width="1" height="40" fill="#131417"/>
+    <rect x="109" y="0" width="3" height="40" fill="#131417"/>
+  </svg>
+  <span class="signature">Alex Shang</span>
+</footer>
+
+<div class="modal" id="project-modal" aria-hidden="true">
+  <div class="modal__backdrop" data-modal-close></div>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button type="button" class="modal__close" data-modal-close aria-label="Close">&times;</button>
+    <div class="modal__tags" id="modal-tags"></div>
+    <h3 class="modal__title" id="modal-title"></h3>
+    <div class="modal__meta" id="modal-meta"></div>
+    <div class="modal__body" id="modal-body"></div>
+    <div class="modal__demo" id="modal-demo"></div>
+    <div class="modal__links" id="modal-links"></div>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script src="work.js"></script>
+</body>
+</html>
