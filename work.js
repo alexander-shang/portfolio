@@ -15,7 +15,7 @@
         'The model achieved an accuracy of 97%, indicating strong predictive performance for identifying flippable properties, reducing time spent searching for properties, and increasing the likelihood of profitable investments.',
         'This pipeline can also be applied to other real estate markets, providing a scalable solution for investors looking to identify profitable opportunities in different regions.',
       ],
-      demo: '<iframe src="/assets/BUSI488 Capstone - Team 9.pdf"></iframe>',
+      demo: '<zillow.pdf"></iframe>',
       links: [
         // { label: 'GitHub', href: '#' },
       ],
@@ -54,9 +54,9 @@
         'We examined how unemployment transition risk changed across pre-COVID, COVID, and post-COVID periods, finding that job-loss risk increased sharply during COVID and that vulnerability consistently varied by education, age, and employment status. The analysis also found that the predictors of job loss shifted during the pandemic, highlighting how economic shocks can reshape labor-market risk.',
         'Research and analysis were done via Python, with data cleaning and visualization performed using various libraries including: Pandas, NumPy, and Matplotlib.',
       ],
-      demo: null,
+      demo: '<iframe src="/assets/covid.pdf"></iframe>',
       links: [
-        // { label: 'Read the paper', href: '#' },
+        { label: 'Python Notebook', href: 'https://www.nber.org/papers/w32063' },
       ],
     },
     environment: {

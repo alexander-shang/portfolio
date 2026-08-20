@@ -498,13 +498,16 @@
    ============================================================ */
    .work-page {
     flex: 1;
-    max-width: 900px;
     width: 100%;
     margin: 0 auto;
     padding: 60px 32px;
   }
    
   .work-page .headline { margin-bottom: 12px; }
+
+  .work-header {
+    max-width: 900px;
+  }
    
   .work-lede {
     font-size: 15px;
