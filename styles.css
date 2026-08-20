@@ -711,3 +711,24 @@
   @media (max-width: 560px) {
     .modal__dialog { padding: 24px; }
   }
+
+  /* ============================================================
+    STUDIO (placeholder for now)
+   ============================================================ */
+.coming-soon-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 20px;
+  text-align: center;
+}
+.coming-soon-page .headline { text-align: center; }
+.coming-soon-lede {
+  font-size: 15px;
+  color: #6B6D72;
+  max-width: 360px;
+  margin: 0;
+}
