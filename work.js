@@ -15,15 +15,15 @@
         'The model achieved an accuracy of 97%, indicating strong predictive performance for identifying flippable properties, reducing time spent searching for properties, and increasing the likelihood of profitable investments.',
         'This pipeline can also be applied to other real estate markets, providing a scalable solution for investors looking to identify profitable opportunities in different regions.',
       ],
-      demo: '<zillow.pdf"></iframe>',
+      demo: '<iframe src="/assets/zillow.pdf"></iframe>',
       links: [
-        // { label: 'GitHub', href: '#' },
+        { label: 'Python Notebook', href: 'https://github.com/alexander-shang/portfolio/blob/main/assets/zillow.ipynb'},
       ],
     },
     scheduling: {
       title: 'CS Dept. Scheduling Assistant',
       tags: ['AI', 'Full-stack'],
-      meta: 'Python, JavaScript, React, PostgreSQL, FastAPI',
+      meta: 'Python, JavaScript, React, PostgreSQL, FastAPI, HTML, CSS, TypeScript',
       body: [
         "An AI-powered office-hours scheduling feature built into the school's CS department site, on a four-person team using GPT-4o's API.",
         'Owned the backend: prompt engineering, testing, and handling inconsistent model outputs.',
@@ -34,7 +34,7 @@
     ikea: {
       title: 'IKEA Catalogue Assistant',
       tags: ['AI', 'Product'],
-      meta: 'Prototype',
+      meta: 'TypeScript, JavaScript, HTML, CSS',
       body: [
         "An AI chatbot for interior designed based on IKEA's catalogue to build a more personalized shopping experience.", 
         "The chatbot uses RAGLoader to retrieve information from data scraped from IKEA catalogues, magazines, and public forums, ultimately with the goal of exploring how conversational interfaces can replace faceted search for large, messy product data.",
@@ -47,8 +47,8 @@
     },
     covid: {
       title: 'Economic Impacts of COVID-19',
-      tags: ['Research', 'Python', 'Data'],
-      meta: '',
+      tags: ['Research', 'Data'],
+      meta: 'Python',
       body: [
         'A research project analyzing near-term job-loss risk using linked monthly Current Population Survey (CPS) data from 2018–2023.',
         'We examined how unemployment transition risk changed across pre-COVID, COVID, and post-COVID periods, finding that job-loss risk increased sharply during COVID and that vulnerability consistently varied by education, age, and employment status. The analysis also found that the predictors of job loss shifted during the pandemic, highlighting how economic shocks can reshape labor-market risk.',
@@ -56,7 +56,7 @@
       ],
       demo: '<iframe src="/assets/covid.pdf"></iframe>',
       links: [
-        { label: 'Python Notebook', href: 'https://www.nber.org/papers/w32063' },
+        { label: 'Python Notebook', href: 'https://github.com/alexander-shang/portfolio/blob/main/assets/covid19.ipynb' },
       ],
     },
     environment: {
