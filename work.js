@@ -1,8 +1,3 @@
-// Edit PROJECTS below to update project details. Set `demo` to an
-// <img>/<iframe> HTML string once you have real screenshots (drop
-// images in an assets/ folder next to this file), or leave it null
-// for the placeholder. Add real links (GitHub, writeup, live demo)
-// in the `links` array.
 (function () {
   const PROJECTS = {
     musicgen: {
@@ -55,7 +50,7 @@
         "The chatbot uses RAGLoader to retrieve information from data scraped from IKEA catalogues, magazines, and public forums, ultimately with the goal of exploring how conversational interfaces can replace faceted search for large, messy product data.",
       ],
       demo: `<video controls>
-        <source src="assets/chatbot demo.mp4" type="video/quicktime">
+        <source src="assets/chatbot demo.mp4" type="video/mp4">
         Your browser does not support this video format.
         </video>`,
       links: [],
