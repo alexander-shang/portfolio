@@ -1,8 +1,3 @@
-// This is a variant of clock-prototype.js — same spin-in and
-// cursor-tracking mechanics, but with one addition: hovering (or
-// focusing) a label "pins" both hands to point at that label instead
-// of the cursor, and swaps the headline for a time + bio blurb.
-
 (function () {
   const clock = document.getElementById('clock');
   const hourEl = document.getElementById('hand-hour');
@@ -191,9 +186,6 @@
     sunAnimation = requestAnimationFrame(animate);
   }
 
-  // Position the sun correctly on load, but keep it hidden until
-  // the first label activates it — otherwise it flashes at
-  // whatever position/CSS default it has before that point.
   if (sunEl) {
     const initialPos = getSunPosition(sunAngle);
     sunEl.style.left = `${initialPos.x}%`;

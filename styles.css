@@ -548,26 +548,26 @@
     width: 100%;
     aspect-ratio: 4 / 3;
     border-radius: 8px;
+    border: 2px solid var(--ink);
     background: var(--ghost-bg);
-    background-image:
-      linear-gradient(135deg, rgba(19,20,23,0.05), rgba(19,20,23,0));
     position: relative;
     overflow: hidden;
-    transition: transform 0.15s;
   }
-  .gallery-tile:hover .gallery-tile__thumb,
-  .gallery-tile:focus-visible .gallery-tile__thumb {
-    transform: scale(1.02);
-  }
-  .gallery-tile__thumb::after {
-    content: attr(data-label);
+
+  .gallery-tile__img {
     position: absolute;
-    left: 12px;
-    bottom: 12px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.03em;
-    color: #9A9A9A;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* transition: opacity 0.25s ease, transform 0.2s ease; */
+  }
+  .gallery-tile__img--base { opacity: 1; }
+  .gallery-tile__img--hover { opacity: 0; }
+
+  .gallery-tile:hover .gallery-tile__img--hover,
+  .gallery-tile:focus-visible .gallery-tile__img--hover {
+    opacity: 1;
   }
    
   .gallery-tile__title {
