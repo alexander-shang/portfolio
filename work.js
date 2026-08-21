@@ -5,6 +5,21 @@
 // in the `links` array.
 (function () {
   const PROJECTS = {
+    musicgen: {
+      title: 'Generative AI Museum Exhibit',
+      tags: ['AI', 'Prototype'],
+      meta: 'Node.js, Python, API, JavaScript, HTML, CSS, Figma',
+      body: [
+        'A prototype for an interactive museum exhibit designed to demonstrate the capabilities of music/video generative AI.',
+        'Before development, I created multiple designs and wireframes in Figma to explore different layouts, user flow, and features for the exhibit experience.',
+        'I focused on the music generation component, researching and evaluating multiple generative AI APIs and developing a prototype to display proof of concept and basic functionalities.',
+      ],
+      demo: `<video controls>
+        <source src="assets/music gen.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>`,
+      links: [],
+    },
     flippability: {
       title: 'House Flippability Model',
       tags: ['ML', 'Data'],
@@ -15,7 +30,7 @@
         'The model achieved an accuracy of 97%, indicating strong predictive performance for identifying flippable properties, reducing time spent searching for properties, and increasing the likelihood of profitable investments.',
         'This pipeline can also be applied to other real estate markets, providing a scalable solution for investors looking to identify profitable opportunities in different regions.',
       ],
-      demo: '<iframe src="assets/zillow.pdf"></iframe>',
+      demo: '<iframe src="assets/zillow.pdf" width="100%" height="420" title="House flippability model preview" loading="lazy"></iframe>',
       links: [
         { label: 'Python Notebook', href: 'https://github.com/alexander-shang/portfolio/blob/main/assets/zillow.ipynb'},
       ],
@@ -36,12 +51,12 @@
       tags: ['AI', 'Product'],
       meta: 'TypeScript, JavaScript, HTML, CSS',
       body: [
-        "An AI chatbot for interior designed based on IKEA's catalogue to build a more personalized shopping experience.", 
+        "An AI chatbot for interior designed based on IKEA's catalogue to build a more personalized shopping experience.",
         "The chatbot uses RAGLoader to retrieve information from data scraped from IKEA catalogues, magazines, and public forums, ultimately with the goal of exploring how conversational interfaces can replace faceted search for large, messy product data.",
       ],
       demo: `<video controls>
-        <source src="assets/chatbot demo.mov" type="video/mp4">
-        Your browser does not support the video tag.
+        <source src="assets/chatbot demo.mp4" type="video/quicktime">
+        Your browser does not support this video format.
         </video>`,
       links: [],
     },
@@ -54,7 +69,7 @@
         'We examined how unemployment transition risk changed across pre-COVID, COVID, and post-COVID periods, finding that job-loss risk increased sharply during COVID and that vulnerability consistently varied by education, age, and employment status. The analysis also found that the predictors of job loss shifted during the pandemic, highlighting how economic shocks can reshape labor-market risk.',
         'Research and analysis were done via Python, with data cleaning and visualization performed using various libraries including: Pandas, NumPy, and Matplotlib.',
       ],
-      demo: '<iframe src="assets/covid.pdf"></iframe>',
+      demo: '<iframe src="assets/covid.pdf" width="100%" height="420" title="COVID-19 research paper preview" loading="lazy"></iframe>',
       links: [
         { label: 'Python Notebook', href: 'https://github.com/alexander-shang/portfolio/blob/main/assets/covid19.ipynb' },
       ],
@@ -66,7 +81,7 @@
       body: [
         'A proposed research study examining how trees contribute to local property values through the reduction of crime rate, based on a similar paper written by Han et. Al.',
       ],
-      demo: '<iframe src="assets/econ proposal.pdf"></iframe>',
+      demo: '<iframe src="assets/econ proposal.pdf" width="100%" height="420" title="Environment, crime, and property value research preview" loading="lazy"></iframe>',
       links: [{label: 'Orginal Paper', href: 'https://www.nber.org/papers/w32063'}],
     },
   };
@@ -112,7 +127,15 @@
     modal.querySelector('.modal__close').focus();
   }
 
+  function stopMedia() {
+    demoEl.querySelectorAll('video, audio').forEach((el) => {
+      el.pause();
+      el.currentTime = 0;
+    });
+  }
+
   function closeModal() {
+    stopMedia();
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
